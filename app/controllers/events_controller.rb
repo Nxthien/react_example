@@ -12,6 +12,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def update
+    event = Event.find_by id: params[:id]
+    if event.update_attributes event_params
+      render json: event
+    else
+      render nothing: true, status: :uprocessable_entity
+    end
+  end
+
   def destroy
     event = Event.find_by id: params[:id]
     event.destroy

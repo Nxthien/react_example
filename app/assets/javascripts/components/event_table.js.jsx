@@ -1,16 +1,19 @@
 var EventTable = React.createClass({
+
+  componentDidMount: function(){
+    console.log(this.props.events)
+  },
   handleDelete: function(event){
-    alert("sss")
-    var events = this.state.events.slide();
-    index = events.indexOf(event);
-    events.splice(index, 1);
-    this.replaceState({events: events});
+    this.props.handleDelete(event)
+  },
+  handleUpdate: function(old_event,event){
+    this.props.handleUpdate(event)
   },
   render: function() {
     var events = [];
     this.props.events.forEach(function(event) {
       events.push(<Event event={event}
-      key={'event' + event.id} handleDeleteEvent={this.handleDelete} />);
+      key={'event' + event.id} handleDeleteEvent={this.handleDelete} handeUpdateEvent={this.handleUpdate} />);
     }.bind(this));
     return(
       <table className="table table-striped">
